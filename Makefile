@@ -1,2 +1,2 @@
 all:
-	g++ benchmark.cpp sca.cpp main.cpp -o sca
+	g++ benchmark.cpp sca.cpp main.cpp -o sca -std=c++11

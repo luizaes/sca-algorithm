@@ -1,13 +1,13 @@
 #include "sca.hpp"
-#include "benchmark.hpp"
-
-using namespace std;
 
 int main() {
 
-	SCA sca = SCA(30, 1000);
+	SCA sca = SCA(30, 500);
+	Benchmark func = Benchmark(1, -100, 100);
 
-	for(int i = 0; i < sca.maxIterations; i++) {
+	sca.initPopulation(func);
+
+	for(int i = 0; i < sca.getIterations(); i++) {
 
 	}
 
