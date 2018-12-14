@@ -10,7 +10,7 @@ struct Agent {
 class SCA {
 
 public:
-	SCA(int number, int iteration);
+	SCA(int number, int iteration, int dimensions);
 	~SCA();
 	void initPopulation(Benchmark function);
 	vector<Agent> getSolutions();
