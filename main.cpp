@@ -6,7 +6,8 @@ int main() {
 	Benchmark func = Benchmark(1, -100, 100);
 	int contador = 0;
 	double evaluation = 0, best = 0;
-	vector<Agent> solutions, bestSolution;
+	vector<Agent> solutions;
+	vector<double> bestSolution;
 
 	// Initializes the initial population
 	sca.initPopulation(func);
@@ -34,13 +35,27 @@ int main() {
 			}
 		}
 
-		// Update random numbers
-		
-
-		// Update the position of the agents
+		// Update random numbers and update the position of the agents
+		sca.update(func, bestSolution, contador);
 
 		contador++;
 	} while(contador < sca.getIterations());
+
+	for(int i = 0; i < sca.getAgents(); i++) {
+		evaluation = func.objectiveFunction(solutions[i].solution);
+		if(i == 0) {
+			best = evaluation;
+			bestSolution = solutions[i].solution;
+		} else if(evaluation < best) {
+			best = evaluation;
+			bestSolution = solutions[i].solution;
+		}
+	}
+
+	for(int i = 0; i < bestSolution.size(); i++) {
+		cout << bestSolution[i] << " ";
+	}
+	cout << endl;
 
 	return 0;
 }

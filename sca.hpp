@@ -17,10 +17,13 @@ public:
 	int getIterations();
 	int getAgents();
 	int getDimensions();
+	void update(Benchmark function, vector<double> best, int iteration);
 
 private:
 	int numberAgents;
 	int maxIterations;
 	int numberDimensions;
 	vector<Agent> solutions;
+	mt19937 generator;
+	int a;
 };
