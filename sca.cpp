@@ -47,6 +47,7 @@ void SCA::update(Benchmark function, vector<double> best, int iteration) {
 
 	double r1, r2, r3, r4;
 	uniform_real_distribution<double> distribution(0.0,1.0);
+	uniform_real_distribution<double> distribution2(function.getLowerBound(),function.getUpperBound());
 
 	r1 = a - (iteration * (a/maxIterations));
 	r2 = (2*M_PI) * distribution(generator);
@@ -58,8 +59,14 @@ void SCA::update(Benchmark function, vector<double> best, int iteration) {
 			if(r4 < 0.5) {
 				// Xi+1 = Xi + r1 * sin(r2) * abs(r3 * Pi - Xi)
 				solutions[i].solution[j] = solutions[i].solution[j] + r1 * sin(r2) * abs(r3 * best[j] - solutions[i].solution[j]);
+				if(solutions[i].solution[j] > function.getUpperBound() || solutions[i].solution[j] < function.getLowerBound()) {
+					solutions[i].solution[j] = distribution2(generator);
+				}
 			} else if(r4 >= 0.5) {
 				solutions[i].solution[j] = solutions[i].solution[j] + r1 * cos(r2) * abs(r3 * best[j] - solutions[i].solution[j]);
+				if(solutions[i].solution[j] > function.getUpperBound() || solutions[i].solution[j] < function.getLowerBound()) {
+					solutions[i].solution[j] = distribution2(generator);
+				}
 			}
 		}
 	}

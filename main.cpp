@@ -3,7 +3,7 @@
 int main() {
 
 	SCA sca = SCA(30, 500, 20);
-	Benchmark func = Benchmark(1, -100, 100);
+	Benchmark func = Benchmark(2, -32, 32);
 	int contador = 0;
 	double evaluation = 0, best = 0;
 	vector<Agent> solutions;
@@ -11,15 +11,6 @@ int main() {
 
 	// Initializes the initial population
 	sca.initPopulation(func);
-
-	//vector<Agent> solutions = sca.getSolutions();
-
-	// for(int i = 0; i < sca.getAgents(); i++) {
-	// 	for(int j = 0; j < sca.getDimensions(); j++) {
-	// 		cout << solutions[i].solution[j] << " ";
-	// 	}
-	// 	cout << endl;
-	// }
 
 	do {
 		solutions = sca.getSolutions();
@@ -41,6 +32,8 @@ int main() {
 		contador++;
 	} while(contador < sca.getIterations());
 
+	solutions = sca.getSolutions();
+
 	for(int i = 0; i < sca.getAgents(); i++) {
 		evaluation = func.objectiveFunction(solutions[i].solution);
 		if(i == 0) {
@@ -52,10 +45,13 @@ int main() {
 		}
 	}
 
+	cout << "Variables: " << endl;
 	for(int i = 0; i < bestSolution.size(); i++) {
 		cout << bestSolution[i] << " ";
 	}
 	cout << endl;
+
+	cout << "Best: " << best << endl;
 
 	return 0;
 }
